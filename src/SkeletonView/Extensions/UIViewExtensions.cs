@@ -27,6 +27,7 @@ using Foundation;
 using ObjCRuntime;
 using UIKit;
 using System.Linq;
+using SkeletonView.Views;
 
 namespace SkeletonView.Extensions
 {
@@ -38,13 +39,7 @@ namespace SkeletonView.Extensions
             public static readonly NSString Skeletonable = new NSString("skeletonable");
             public static readonly NSString Status = new NSString("status");
             public static readonly NSString SkeletonLayer = new NSString("skeletonLayer");
-        }
-
-        public enum Status
-        {
-            On,
-            Off
-        }
+        }       
 
         public static bool IsSkeletonActive(this UIView This)
         {
@@ -54,17 +49,13 @@ namespace SkeletonView.Extensions
 
         public static bool GetIsSkeletonable(this UIView This)
         {
-            if (This is SkeletonView)
-                return true;
             var isSkeletonable = This.GetAssociatedObject<NSNumber>(AssociatedKeys.Skeletonable);
             return isSkeletonable != null && isSkeletonable.BoolValue;
         }
 
-        [Export("isSkeletonable")]
-        public static void GetIsSkeletonable(this UIView This, bool isSkeletonable)
+        [Export("isSkeletonable:")]
+        public static void SetIsSkeletonable(this UIView This, bool isSkeletonable)
         {
-            if (This is SkeletonView)
-                return;
             This.SetAssociatedObject(AssociatedKeys.Skeletonable, new NSNumber(isSkeletonable));
         }
 
@@ -74,7 +65,7 @@ namespace SkeletonView.Extensions
             return status != null ? Status.Off : (Status)status.Int32Value;
         }
 
-        [Export("status")]
+        [Export("status:")]
         public static void SetSkeletonStatus(this UIView This, Status status)
         {
             This.SetAssociatedObject(AssociatedKeys.Skeletonable, new NSNumber((int)status));

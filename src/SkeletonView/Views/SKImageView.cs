@@ -1,5 +1,5 @@
 ﻿//
-// MyClass.cs
+// SKImageView.cs
 //
 // Author:
 //       valentingrigorean <v.grigorean@software-dep.net>
@@ -23,36 +23,27 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using UIKit;
-using CoreGraphics;
 using System;
-using Foundation;
-using ObjCRuntime;
-
-namespace SkeletonView
+using CoreGraphics;
+using UIKit;
+namespace SkeletonView.Views
 {
-       
-
-    public class SkeletonView : UIView
+    public class SKImageView : UIImageView
     {
-        public SkeletonView()
+        public SKImageView()
         {
         }
 
-        public SkeletonView(IntPtr handle) : base(handle)
+        public SKImageView(IntPtr handle) : base(handle)
         {
         }
 
-        public SkeletonView(CGRect frame) : base(frame)
+        public SKImageView(CGRect frame) : base(frame)
         {
         }
-       
-    }
 
-
-    [Category(typeof(UIView))]
-    public static class SkeletonViewExtensions
-    {
-
+        public SKImageView(UIImage image) : base(image)
+        {
+        }
     }
 }

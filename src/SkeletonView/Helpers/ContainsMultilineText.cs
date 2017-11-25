@@ -47,7 +47,7 @@ namespace SkeletonView.Helpers
                        SkeletonConfig.Default.MultilineLastLineFillPercent;
         }
 
-        [Export("lastLineFillingPercent")]
+        [Export("lastLineFillingPercent:")]
         public static void SetLastLineFillingPercent(this UILabel This, int lastLineFillingPercent)
         {
             lastLineFillingPercent = Math.Min(100, lastLineFillingPercent);
@@ -59,7 +59,7 @@ namespace SkeletonView.Helpers
             return This.GetAssociatedObject<NSNumber>(NumLinesKey)?.Int32Value ?? 0;
         }
 
-        [Export("numLines")]
+        [Export("numLines:")]
         public static void SetNumLines(this UITextView This, int numLines)
         {
             numLines = Math.Max(0, numLines);
@@ -72,7 +72,7 @@ namespace SkeletonView.Helpers
                        SkeletonConfig.Default.MultilineLastLineFillPercent;
         }
 
-        [Export("lastLineFillingPercent")]
+        [Export("lastLineFillingPercent:")]
         public static void SetLastLineFillingPercent(this UITextView This, int lastLineFillingPercent)
         {
             lastLineFillingPercent = Math.Min(100, lastLineFillingPercent);

@@ -53,10 +53,12 @@
     <Folder Include="Helpers\">
       <DependentUpon>Helpers</DependentUpon>
     </Folder>
+    <Folder Include="Views\">
+      <DependentUpon>Views</DependentUpon>
+    </Folder>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SkeletonView.cs" />
     <Compile Include="SkeletonConfig.cs" />
     <Compile Include="SkeletonColors.cs" />
     <Compile Include="Extensions\UIColorExtensions.cs" />
@@ -69,10 +71,13 @@
     <Compile Include="Extensions\CALayerExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\UIViewFrameExtensions.cs" />
-    <Compile Include="SkeletonAnimation.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="Storyboard.storyboard" />
+    <Compile Include="Views\SkeletonView.cs" />
+    <Compile Include="Views\SKLabel.cs" />
+    <Compile Include="Views\SKTextView.cs" />
+    <Compile Include="Views\SKButton.cs" />
+    <Compile Include="Views\SKImageView.cs" />
+    <Compile Include="Views\ISKView.cs" />
+    <Compile Include="Views\SKViewAdapter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
