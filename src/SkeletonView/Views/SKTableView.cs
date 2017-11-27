@@ -1,5 +1,5 @@
 ﻿//
-// SkeletonConfig.cs
+// SKTableView.cs
 //
 // Author:
 //       valentingrigorean <v.grigorean@software-dep.net>
@@ -23,19 +23,53 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using UIKit;
+using System;
+using System.ComponentModel;
+using CoreGraphics;
+using Foundation;
 using SkeletonView.Extensions;
+using UIKit;
 
-namespace SkeletonView
+namespace SkeletonView.Views
 {
-    public class SkeletonGrandient
+    [Register(nameof(SKTableView))]
+    public class SKTableView : UITableView, ISKView
     {
-        public SkeletonGrandient(UIColor baseColor, UIColor secondaryColor = null)
+        public SKTableView()
         {
-            Colors = secondaryColor == null ?
-                baseColor.MakeGrandient() : new[] { baseColor, secondaryColor, baseColor };
         }
 
-        public UIColor[] Colors { get; }
+        public SKTableView(IntPtr handle) : base(handle)
+        {
+        }
+
+        public SKTableView(CGRect frame) : base(frame)
+        {
+        }
+
+        public SKTableView(CGRect frame, UITableViewStyle style) : base(frame, style)
+        {
+        }
+
+        public bool IsSkeletonActive => this.IsSkeletonActive();
+
+        [Export(SKView.IsSkeletonableKey), Browsable(true)]
+        public bool IsSkeletonable
+        {
+            get => this.GetIsSkeletonable();
+            set => this.SetIsSkeletonable(value);
+        }
+
+        public SkeletonLayer SkeletonLayer
+        {
+            get => this.GetSkeletonLayer();
+            set => this.SetSkeletonLayer(value);
+        }
+
+        public Status Status
+        {
+            get => this.GetSkeletonStatus();
+            set => this.SetSkeletonStatus(value);
+        }
     }
 }

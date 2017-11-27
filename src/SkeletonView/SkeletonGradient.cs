@@ -1,5 +1,5 @@
 ﻿//
-// MyClass.cs
+// SkeletonConfig.cs
 //
 // Author:
 //       valentingrigorean <v.grigorean@software-dep.net>
@@ -23,54 +23,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System;
-using System.ComponentModel;
-using CoreGraphics;
-using Foundation;
-using SkeletonView.Views;
 using UIKit;
+using SkeletonView.Extensions;
 
 namespace SkeletonView
 {
-    [Register("SkeletonView"), DesignTimeVisible(true)]
-    public class SKView : UIView, ISKView
+    public class SkeletonGradient
     {
-        private readonly ISKView _sdkView;
-
-        public SKView()
+        public SkeletonGradient(UIColor baseColor, UIColor secondaryColor = null)
         {
-            _sdkView = new SKViewAdapter(this);
+            Colors = secondaryColor == null ?
+                baseColor.MakeGrandient() : new[] { baseColor, secondaryColor, baseColor };
         }
 
-        public SKView(IntPtr handle) : base(handle)
-        {
-            _sdkView = new SKViewAdapter(this);
-        }
-
-        public SKView(CGRect frame) : base(frame)
-        {
-            _sdkView = new SKViewAdapter(this);
-        }
-
-        public bool IsSkeletonActive => _sdkView.IsSkeletonActive;
-
-        [Export("isSkeletonable")]
-        public bool IsSkeletonable
-        {
-            get => _sdkView.IsSkeletonable;
-            set => _sdkView.IsSkeletonable = value;
-        }
-
-        public SkeletonLayer SkeletonLayer
-        {
-            get => _sdkView.SkeletonLayer;
-            set => _sdkView.SkeletonLayer = value;
-        }
-
-        public Status Status
-        {
-            get => _sdkView.Status;
-            set => _sdkView.Status = value;
-        }
+        public UIColor[] Colors { get; }
     }
 }

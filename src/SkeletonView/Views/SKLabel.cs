@@ -24,12 +24,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.ComponentModel;
+using CoreGraphics;
+using Foundation;
+using SkeletonView.Extensions;
+using UIKit;
+using SkeletonView.Helpers;
+
 namespace SkeletonView.Views
 {
-    public class SKLabel
+    [Register(nameof(SKLabel))]
+    public class SKLabel : UILabel, ISKView
     {
         public SKLabel()
         {
+        }
+
+        public SKLabel(IntPtr handle) : base(handle)
+        {
+        }
+
+        public SKLabel(CGRect frame) : base(frame)
+        {
+        }
+
+        public bool IsSkeletonActive => this.IsSkeletonActive();
+
+        [Export(SKView.IsSkeletonableKey), Browsable(true)]
+        public bool IsSkeletonable
+        {
+            get => this.GetIsSkeletonable();
+            set => this.SetIsSkeletonable(value);
+        }
+
+        public SkeletonLayer SkeletonLayer
+        {
+            get => this.GetSkeletonLayer();
+            set => this.SetSkeletonLayer(value);
+        }
+
+        public Status Status
+        {
+            get => this.GetSkeletonStatus();
+            set => this.SetSkeletonStatus(value);
+        }
+
+        [Export("lastLineFillPercent"),Browsable(true)]
+        public int LastLineFillPercent
+        {
+            get => this.GetLastLineFillingPercent();
+            set => this.SetLastLineFillingPercent(value);
         }
     }
 }

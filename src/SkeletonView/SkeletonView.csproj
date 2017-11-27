@@ -48,13 +48,10 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Extensions\">
-      <DependentUpon>Extensions</DependentUpon>
     </Folder>
     <Folder Include="Helpers\">
-      <DependentUpon>Helpers</DependentUpon>
     </Folder>
     <Folder Include="Views\">
-      <DependentUpon>Views</DependentUpon>
     </Folder>
   </ItemGroup>
   <ItemGroup>
@@ -62,22 +59,23 @@
     <Compile Include="SkeletonConfig.cs" />
     <Compile Include="SkeletonColors.cs" />
     <Compile Include="Extensions\UIColorExtensions.cs" />
-    <Compile Include="SkeletonGrandient.cs" />
+    <Compile Include="SkeletonGradient.cs" />
     <Compile Include="SkeletonLayer.cs" />
     <Compile Include="Extensions\NSObjectExtensions.cs" />
     <Compile Include="Helpers\ContainsMultilineText.cs" />
     <Compile Include="Extensions\UIViewExtensions.cs" />
-    <Compile Include="Extensions\SkeletonViewExtensions.cs" />
     <Compile Include="Extensions\CALayerExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\UIViewFrameExtensions.cs" />
-    <Compile Include="Views\SkeletonView.cs" />
+    <Compile Include="Views\SKView.cs" />
     <Compile Include="Views\SKLabel.cs" />
     <Compile Include="Views\SKTextView.cs" />
     <Compile Include="Views\SKButton.cs" />
     <Compile Include="Views\SKImageView.cs" />
     <Compile Include="Views\ISKView.cs" />
-    <Compile Include="Views\SKViewAdapter.cs" />
+    <Compile Include="Extensions\SKViewExtensions.cs" />
+    <Compile Include="SkeletonAnimationBuilder.cs" />
+    <Compile Include="Views\SKTableView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

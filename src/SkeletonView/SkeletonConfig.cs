@@ -34,7 +34,7 @@ namespace SkeletonView
 
         public UIColor TintColor { get; set; } = SkeletonColors.Clouds;
 
-        public SkeletonGrandient Gradient { get; set; } = new SkeletonGrandient(SkeletonColors.Clouds);
+        public SkeletonGradient Gradient { get; set; } = new SkeletonGradient(SkeletonColors.Clouds);
 
         public nfloat MultilineHeight { get; set; } = 15;
 

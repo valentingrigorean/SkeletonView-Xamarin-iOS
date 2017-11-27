@@ -24,9 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-
+using SkeletonView.Extensions;
 using UIKit;
-using SkeletonView.Helpers;
 
 namespace SkeletonView.Exemple
 {
@@ -41,7 +40,7 @@ namespace SkeletonView.Exemple
         {
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
-            Console.WriteLine(TextView.GetNumLines());
+            this.View.ShowAnimatedSkeleton();
         }
 
         public override void DidReceiveMemoryWarning()

@@ -24,11 +24,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.ComponentModel;
 using CoreGraphics;
+using Foundation;
+using SkeletonView.Extensions;
 using UIKit;
+
 namespace SkeletonView.Views
 {
-    public class SKButton : UIButton
+    [Register(nameof(SKButton))]
+    public class SKButton : UIButton, ISKView
     {
         public SKButton()
         {
@@ -46,6 +51,25 @@ namespace SkeletonView.Views
         {
         }
 
+        public bool IsSkeletonActive => this.IsSkeletonActive();
 
+        [Export(SKView.IsSkeletonableKey), Browsable(true)]
+        public bool IsSkeletonable
+        {
+            get => this.GetIsSkeletonable();
+            set => this.SetIsSkeletonable(value);
+        }
+
+        public SkeletonLayer SkeletonLayer
+        {
+            get => this.GetSkeletonLayer();
+            set => this.SetSkeletonLayer(value);
+        }
+
+        public Status Status
+        {
+            get => this.GetSkeletonStatus();
+            set => this.SetSkeletonStatus(value);
+        }
     }
 }

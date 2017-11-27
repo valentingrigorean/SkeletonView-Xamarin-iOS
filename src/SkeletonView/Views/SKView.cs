@@ -1,5 +1,5 @@
 ﻿//
-// SkeletonViewExtensions.cs
+// MyClass.cs
 //
 // Author:
 //       valentingrigorean <v.grigorean@software-dep.net>
@@ -24,9 +24,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using ObjCRuntime;
+using System.ComponentModel;
+using CoreGraphics;
+using Foundation;
+using SkeletonView.Extensions;
+using SkeletonView.Views;
 using UIKit;
-namespace SkeletonView.Extensions
+
+namespace SkeletonView
 {
-    
+    [Register("SkeletonView"), DesignTimeVisible(true)]
+    public class SKView : UIView, ISKView
+    {
+        public SKView()
+        {
+        }
+
+        public SKView(IntPtr handle) : base(handle)
+        {
+        }
+
+        public SKView(CGRect frame) : base(frame)
+        {
+        }
+
+        public const string IsSkeletonableKey = "isSkeletonable";
+
+        public bool IsSkeletonActive => this.IsSkeletonActive();
+
+        [Export(IsSkeletonableKey),Browsable(true)]
+        public bool IsSkeletonable
+        {
+            get => this.GetIsSkeletonable();
+            set => this.SetIsSkeletonable(value);
+        }
+
+        public SkeletonLayer SkeletonLayer
+        {
+            get => this.GetSkeletonLayer();
+            set => this.SetSkeletonLayer(value);
+        }
+
+        public Status Status
+        {
+            get => this.GetSkeletonStatus();
+            set => this.SetSkeletonStatus(value);
+        }
+    }
 }
