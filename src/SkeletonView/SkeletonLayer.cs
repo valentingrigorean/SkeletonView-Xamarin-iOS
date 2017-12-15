@@ -71,17 +71,20 @@ namespace SkeletonView
             }
         }
 
-        public static CAAnimation GetLayerAnimation(this SkeletonType This, CALayer layer)
+        public static SkeletonLayerAnimation GetLayerAnimation(this SkeletonType This)
         {
-            switch (This)
+            return (layer) =>
             {
-                case SkeletonType.Solid:
-                    return layer.Pulse();
-                case SkeletonType.Grandient:
-                    return layer.Sliding();
-                default:
-                    throw new NotSupportedException();
-            }
+                switch (This)
+                {
+                    case SkeletonType.Solid:
+                        return layer.Pulse();
+                    case SkeletonType.Grandient:
+                        return layer.Sliding();
+                    default:
+                        throw new NotSupportedException();
+                }
+            };           
         }
     }
 
@@ -110,8 +113,8 @@ namespace SkeletonView
 
         public void StartAnimation(SkeletonLayerAnimation anim = null)
         {
-            var animation = anim?.Invoke(ContentLayer) ?? SkeletonType.GetLayerAnimation(ContentLayer);
-            ContentLayer.AddAnimation(animation, SkeletonAnimationKey);
+            var animation = anim ?? SkeletonType.GetLayerAnimation();
+            ContentLayer.PlayAnimation(animation, SkeletonAnimationKey);
         }
 
         public void StopAnimation()

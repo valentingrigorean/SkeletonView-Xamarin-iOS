@@ -62,7 +62,7 @@ namespace SkeletonView.Extensions
 
         public static CALayer[] SkeletonSublayers(this CALayer This)
         {
-            return This.Sublayers.Where(l => l.Name == SkeletonSubLayersName).ToArray();
+            return This.Sublayers == null ? new CALayer[0] : This.Sublayers.Where(l => l.Name == SkeletonSubLayersName).ToArray();
         }
 
         public static void AddMultilinesLayers(this CALayer This, int lines, SkeletonType type, int lastLineFillPercent)
@@ -89,7 +89,7 @@ namespace SkeletonView.Extensions
 
         public static CAAnimation Pulse(this CALayer This)
         {
-            var pulseAnimation = CABasicAnimation.FromKeyPath(nameof(This.BackgroundColor));
+            var pulseAnimation = CABasicAnimation.FromKeyPath("backgroundColor");
             pulseAnimation.SetFrom(This.BackgroundColor);
             pulseAnimation.SetTo(new UIColor(This.BackgroundColor).ComplementaryColor().CGColor);
             pulseAnimation.Duration = 1;
@@ -101,11 +101,11 @@ namespace SkeletonView.Extensions
 
         public static CAAnimation Sliding(this CALayer This)
         {
-            var startPointAnim = CABasicAnimation.FromKeyPath(nameof(CAGradientLayer.StartPoint));
+            var startPointAnim = CABasicAnimation.FromKeyPath("startPoint");
             startPointAnim.From = NSValue.FromCGPoint(new CGPoint(-1, -0.5f));
             startPointAnim.To = NSValue.FromCGPoint(new CGPoint(1, 0.5f));
 
-            var endPointAnim = CABasicAnimation.FromKeyPath(nameof(CAGradientLayer.EndPoint));
+            var endPointAnim = CABasicAnimation.FromKeyPath("endPoint");
             endPointAnim.From = NSValue.FromCGPoint(new CGPoint(0, 0.5f));
             endPointAnim.To = NSValue.FromCGPoint(new CGPoint(2, 0.5f));
 
@@ -117,6 +117,20 @@ namespace SkeletonView.Extensions
                 RepeatCount = float.MaxValue
             };
             return animGroup;
+        }
+
+        public static void PlayAnimation(this CALayer This, SkeletonLayerAnimation anim, string key)
+        {
+            This.SkeletonSublayers()
+                .RecursiveSearch(() => This.AddAnimation(anim(This), key),
+                                 l => PlayAnimation(l, anim, key));
+        }
+
+        public static void StopAnimation(this CALayer This, string key)
+        {
+            This.SkeletonSublayers()
+                .RecursiveSearch(() => This.RemoveAnimation(key),
+                                 l => StopAnimation(l, key));
         }
 
         private static int CalculateNumLines(CALayer layer, int maxLines, SkeletonConfig config)

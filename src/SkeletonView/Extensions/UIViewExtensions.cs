@@ -62,7 +62,7 @@ namespace SkeletonView.Extensions
         public static Status GetSkeletonStatus(this UIView This)
         {
             var status = This.GetAssociatedObject<NSNumber>(AssociatedKeys.Status);
-            return status != null ? Status.Off : (Status)status.Int32Value;
+            return status == null ? Status.Off : (Status)status.Int32Value;
         }
 
         [Export("status:")]

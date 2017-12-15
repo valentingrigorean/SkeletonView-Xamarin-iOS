@@ -52,7 +52,7 @@ namespace SkeletonView.Extensions
             This.Layer.InsertSublayer(skeletonLayer.ContentLayer, int.MaxValue);
             if (animated)
                 skeletonLayer.StartAnimation(animation);
-            This.SetSkeletonStatus(Views.Status.Off);
+            This.SetSkeletonStatus(Views.Status.On);
         }
 
         public static void RemoveSkeletonLayer(this UIView This)
@@ -142,7 +142,7 @@ namespace SkeletonView.Extensions
 
             views.RecursiveSearch(() =>
             {
-                if (!This.IsSkeletonActive())
+                if (This.IsSkeletonActive())
                     return;
                 This.UserInteractionEnabled = false;
                 This.PrepareForSkeleton();
@@ -164,7 +164,7 @@ namespace SkeletonView.Extensions
             var views = SubviewsSkeletonables(This);
 
             views.RecursiveSearch(
-                () => StartSkeletonAnimation(This, anim), 
+                () => StartSkeletonAnimation(This, anim),
                 v => StartSkeletonAnimation(v, anim));
         }
 

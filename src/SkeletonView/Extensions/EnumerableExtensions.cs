@@ -33,7 +33,7 @@ namespace SkeletonView.Extensions
     {
         public static void RecursiveSearch<T>(this IEnumerable<T> This, Action leftBlock, Action<T> recursiveBlock)
         {
-            if (This == null && !This.Any())
+            if (This != null && !This.Any())
             {
                 leftBlock?.Invoke();
                 return;
